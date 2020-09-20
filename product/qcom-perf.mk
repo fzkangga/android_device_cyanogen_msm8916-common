@@ -5,8 +5,13 @@ PRODUCT_COPY_FILES += \
 endif
 
 # Power HAL
+ifeq ($(TARGET_BOARD_PLATFORM_VARIANT),msm8909)
+PRODUCT_PACKAGES += \
+    power.msm8909
+else
 PRODUCT_PACKAGES += \
     power.msm8916
+endif
 
 # Properties
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -14,6 +19,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.core_ctl_min_cpu=0 \
     ro.core_ctl_max_cpu=4
 
+ifeq ($(TARGET_BOARD_PLATFORM_VARIANT),msm8909)
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.min_freq_0=800000
+else
 ifeq ($(TARGET_BOARD_PLATFORM_VARIANT),msm8916)
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.min_freq_0=800000
@@ -22,5 +31,6 @@ ifeq ($(TARGET_BOARD_PLATFORM_VARIANT),msm8939)
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.min_freq_0=960000 \
     ro.min_freq_4=800000
+endif
 endif
 endif

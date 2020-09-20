@@ -1,10 +1,19 @@
 # Audio
+ifeq ($(TARGET_BOARD_PLATFORM_VARIANT),msm8909)
+PRODUCT_PACKAGES += \
+    audiod \
+    audio.primary.msm8909 \
+    libqcompostprocbundle \
+    libqcomvisualizer \
+    libqcomvoiceprocessing
+else
 PRODUCT_PACKAGES += \
     audiod \
     audio.primary.msm8916 \
     libqcompostprocbundle \
     libqcomvisualizer \
     libqcomvoiceprocessing
+endif
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio/audio_effects.conf:system/vendor/etc/audio_effects.conf

@@ -1,5 +1,9 @@
 # Platform
+ifeq ($(TARGET_BOARD_PLATFORM_VARIANT),msm8909)
+TARGET_BOARD_PLATFORM := msm8909
+else
 TARGET_BOARD_PLATFORM := msm8916
+endif
 
 # Architecture
 ifneq ($(FORCE_32_BIT),true)
@@ -17,11 +21,19 @@ TARGET_2ND_CPU_VARIANT := cortex-a53
 
 TARGET_USES_64_BIT_BINDER := true
 else
+ifeq ($(TARGET_BOARD_PLATFORM_VARIANT),msm8909)
+TARGET_ARCH := arm
+TARGET_ARCH_VARIANT := armv7-a-neon
+TARGET_CPU_ABI := armeabi-v7a
+TARGET_CPU_ABI2 := armeabi
+TARGET_CPU_VARIANT := cortex-a7
+else
 TARGET_ARCH := arm
 TARGET_ARCH_VARIANT := armv7-a-neon
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
 TARGET_CPU_VARIANT := cortex-a53
+endif
 endif
 
 # Init
